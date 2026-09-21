@@ -23,18 +23,18 @@ public class Main {
 
             switch (command) {
                 case "exit":
-                    System.out.println("Выход из эмулятора");
+                    System.out.println("выход из эмулятора");
                     scanner.close();
                     return;
 
                 case "ls":
                 case "cd":
-                    System.out.println("Выполнена команда-заглушка: " + command);
-                    System.out.println("Аргументы: " + Arrays.toString(arguments));
+                    System.out.println("выполнена команда-заглушка: " + command);
+                    System.out.println("аргументы: " + Arrays.toString(arguments));
                     break;
 
                 default:
-                    System.err.println("Ошибка: команда '" + command + "' не найдена");
+                    System.err.println("ошибка: команда '" + command + "' не найдена");
                     break;
             }
         }
