@@ -18,7 +18,7 @@ set "PATH=%JAVA_HOME%\bin;%PATH%"
 
 echo Используется JDK: %JAVA_HOME%
 echo Сборка проекта...
-javac Main.java
+javac src\Main.java
 
 if errorlevel 1 (
     echo Ошибка сборки!
@@ -27,6 +27,6 @@ if errorlevel 1 (
 )
 
 echo Запуск эмулятора...
-java Main
+java -cp src Main
 
 pause
