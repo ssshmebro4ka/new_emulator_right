@@ -24,8 +24,10 @@ public class Main {
         }
 
         if (scriptPath != null) {
-            runScript(scriptPath);
-            return;
+            boolean exited = runScript(scriptPath);
+            if (exited) {
+                return;
+            }
         }
 
         runRepl();
@@ -83,11 +85,11 @@ public class Main {
         scanner.close();
     }
 
-    private static void runScript(String path) {
+    private static boolean runScript(String path) {
         Path script = Paths.get(path);
         if (!Files.exists(script)) {
             System.out.println("Ошибка: стартовый скрипт не найден: " + path);
-            return;
+            return false;
         }
 
         try (BufferedReader reader = Files.newBufferedReader(script)) {
@@ -98,19 +100,22 @@ public class Main {
                 }
                 System.out.println(getPrompt() + line);
                 String result = executeCommand(line.trim());
+
                 if (result == null) {
                     System.out.println("Ошибка: строка скрипта пропущена: " + line);
-                    continue;
+                    return false;
                 }
                 if (result.equals("EXIT")) {
                     System.out.println("Выход из эмулятора");
-                    return;
+                    return true;
                 }
                 System.out.println(result);
             }
         } catch (IOException e) {
             System.out.println("Ошибка чтения стартового скрипта: " + e.getMessage());
+            return false;
         }
+        return false;
     }
 
     private static boolean handleInput(String input) {

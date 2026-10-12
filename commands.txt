@@ -4,4 +4,3 @@ cd /home
 ls -la
 cd a b
 unknowncommand
-exit
